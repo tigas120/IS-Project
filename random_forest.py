@@ -5,12 +5,16 @@ from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, r
 from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from scipy.stats import randint
 from sklearn.metrics import accuracy_score, cohen_kappa_score, precision_score, recall_score
+from sklearn import preprocessing
 
 data  = pd.read_csv("final_music_dataset.csv")
 
 # Split the data into features (X) and target (y)
 X = data.drop(['Class;;','Artist Name','Track Name'], axis=1)
 y = data['Class;;']
+
+min_max_scaler = preprocessing.MinMaxScaler()
+X = min_max_scaler.fit_transform(X)
 
 print(X)
 
